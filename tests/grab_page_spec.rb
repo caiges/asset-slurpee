@@ -1,9 +1,9 @@
-require 'crawler'
+require 'news21_crawler'
 
-describe Crawler do
+describe News21Crawler do
 
   before( :each ) do
-    @crawler = Crawler.new( 'crawl_list.yml' )
+    @crawler = News21Crawler.new( 'crawl_list.yml' )
   end
   
   it "should return an array when parse_urls is called." do
@@ -18,6 +18,10 @@ describe Crawler do
     @crawler.parse_urls().each do | doc |
       doc.instance_of?( Hpricot::Doc ).should == true
     end
+  end
+  
+  it "should create asset directories with the title of the page" do
+    
   end
   
 end
