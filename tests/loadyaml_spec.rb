@@ -1,9 +1,9 @@
-require 'news21_crawler'
+require 'crawler'
 
-describe News21Crawler do
+describe Crawler do
   
   before( :each ) do
-    @crawler = News21Crawler.new( 'crawl_list.yml' )
+    @crawler = Crawler.new( 'crawl_list.yml' )
   end
   
   it "yaml list should load properly." do
@@ -11,7 +11,7 @@ describe News21Crawler do
   end
   
   it "yaml list shouldn't load properly." do
-    crawler = News21Crawler.new
+    crawler = Crawler.new
     lambda{ crawler.load_file( 'not_there_foo.yml' ) }.should raise_error
   end
   

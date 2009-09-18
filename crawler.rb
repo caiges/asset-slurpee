@@ -2,13 +2,13 @@ require 'hpricot'
 require 'open-uri'
 require 'yaml'
 
-class News21Crawler
+class Crawler
   
-  attr :crawl_list, :docs, :news21_targets
+  attr :crawl_list, :docs, :targets
   
-  def initialize( filename = nil )
+  def initialize( filename = nil, pattern = nil )
     @docs = Array.new
-    @news21_targets = Array.new
+    @targets = Array.new
     load_file filename unless filename.nil?
     parse_urls
   end
@@ -42,14 +42,16 @@ class News21Crawler
         story[ 'title' ].gsub! ':', '_'
         story[ 'url' ] = link.get_attribute( 'href' )
         school[ 'stories' ] << story
+        p story[ 'title' ]
+        p story[ 'url' ]
       end
-      p school
-      @news21_targets << school
+      #p school
+      @targets << school
     end
     
   end
   
 end
 
-c = News21Crawler.new( 'crawl_list.yml' )
+c = Crawler.new( 'crawl_list.yml' )
 c.slurp_news21
